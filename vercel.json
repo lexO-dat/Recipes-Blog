@@ -2,19 +2,19 @@
   "version": 2,
   "builds": [
     {
-      "src": "./app.js",  // Ruta al archivo principal de tu servidor
-      "use": "@vercel/node"   // Especifica el entorno para ejecutar tu servidor Node.js
+      "src": "./app.js",  
+      "use": "@vercel/node"  
     },
     {
-      "src": "public/**",  // Ruta al directorio de archivos estáticos (por ejemplo, tus assets, CSS, imágenes, etc.)
-      "use": "@now/static"  // Especifica el entorno para archivos estáticos
+      "src": "public/**", 
+      "use": "@now/static" 
     }
   ],
   "routes": [
-    { "handle": "filesystem" },  // Permite la manipulación de archivos estáticos directamente
+    { "handle": "filesystem" }, 
     {
-      "src": "/(.*)",            // Ruta principal para manejar otras solicitudes
-      "dest": "/"       // Redirige las solicitudes al directorio de archivos estáticos
+      "src": "/(.*)", 
+      "dest": "/"  
     }
   ]
 }
