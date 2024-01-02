@@ -5,8 +5,6 @@ const cookieParser = require('cookie-parser');
 const flash = require('connect-flash');
 const multer = require('multer');
 const path = require('path');  // Agrega esto para manejar rutas
-const alert = require('alert'); // Para mostrar alertas en el navegador
-const swal = require('sweetalert');
 
 
 const app = express();
