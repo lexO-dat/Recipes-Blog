@@ -1,12 +1,12 @@
 
 <div class="row flex-lg-row-reverse align-items-center g-5 py-4 mb-4">
     <div class="col-12 col-lg-6">
-        <img src="/img/a.jpg" width="607px" height="510px" class="d-block mx-lg-auto img-fluid" loading="lazy" alt="cooking">
+        <img src="/img/a.png" width="600px" height="510px" class="d-block mx-lg-auto img-fluid" loading="lazy" alt="cooking" style="filter: drop-shadow(0 2px 5px rgba(0, 0, 0, 0.7));">
     </div>
 
     <div class="col-12 col-lg-6">
         <h1 class="display-5 fw-bold mb-3">
-            Huge selection of recipes ideas 
+            Las mejores recetas para ti 
         </h1>
 
         <p class="lead">
@@ -14,8 +14,8 @@
         </p>
 
         <div class="d-grid gap-2 d-md-flex justify-content-md-start">
-            <a href="/exploreLatest" class="btn btn-primary btn-dark btn-lg px-4 me-md-2">Explore Latest</a>
-            <a href="/exploreRandom" class="btn btn-outline-secondary btn-lg px-4 me-md-2">Explore Random</a>
+            <a href="/exploreLatest" class="btn btn-primary btn-dark btn-lg px-4 me-md-2">Ver las ultimas recetas</a>
+            <a href="/exploreRandom" class="btn btn-outline-secondary btn-lg px-4 me-md-2">Descubre una receta</a>
 
         </div>
 
@@ -26,7 +26,7 @@
 
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
-        <h2>Categories</h2>
+        <h2>Categorias</h2>
     </div>
 <div class="row row-cols-2 row-cols-lg-6 g-2 g-lg-3 py-4">
 
@@ -34,7 +34,7 @@
         <% categories.forEach(function(category, index) { %>
         <a href="/categories/<%- category.name%>" class="col text-center category_link ">
             <div class="category__img shadow">
-                <img src="/img/<%- category.image%>" alt="<%- category.name%>" loading="lazy">
+                <img src="<%- category.img%>" alt="<%- category.name%>" loading="lazy">
             </div>
             <div class="pt-1"><%- category.name%></div>
         </a>
@@ -43,9 +43,9 @@
 
     <a href="/categories" class="col text-center category_link ">
         <div class="category__img shadow">
-            <img src="/img/imagen" alt="American Food" loading="lazy">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" style="filter: blur(4px);" alt="todo" loading="lazy">
         </div>
-        <div class="pt-1">View All</div>
+        <div class="pt-1">Ver Todo</div>
     </a>
 
 </div>
@@ -56,8 +56,8 @@
 <!--Latest-->
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
-        <h2>Latest Recipes</h2>
-        <a href="/exploreLatest" class="ms-auto">View More</a>
+        <h2>Ultimas Recetas</h2>
+        <a href="/exploreLatest" class="ms-auto">Ver mas</a>
     </div>
 
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
@@ -65,7 +65,7 @@
             <% food.recipes.forEach(function(recipe, index) { %>
                     <a href="/recipe/<%= recipe._id%>" class="col text-center category_link">
                     <div class="category__img category__img--large shadow">
-                        <img src="uploads/<%= recipe.img%>" alt="<%= recipe.name%>" loading="lazy">
+                        <img src="<%= recipe.img%>" alt="<%= recipe.name%>" loading="lazy">
                     </div>
                     <div class="pt-1"><%= recipe.name%></div>
                 </a>
@@ -73,24 +73,23 @@
         <% } %>
     </div>
 </section>
-
 <!--Latest End-->
 
 
 
-<!--THAI-->
+<!--Desayunos-->
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
-        <h2>Thai Category</h2>
-        <a href="/categories/Thai" class="ms-auto">View More</a>
+        <h2>Desayunos</h2>
+        <a href="/categories/Desayunos" class="ms-auto">View More</a>
     </div>
 
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
         <% if(food != '') { %>
-            <% food.Thai.forEach(function(recipe, index) { %>
+            <% food.Desayunos.forEach(function(recipe, index) { %>
                     <a href="/recipe/<%= recipe._id%>" class="col text-center category_link">
                     <div class="category__img category__img--large shadow">
-                        <img src="uploads/<%= recipe.img%>" alt="<%= recipe.name%>" loading="lazy">
+                        <img src="<%= recipe.img%>" alt="<%= recipe.name%>" loading="lazy">
                     </div>
                     <div class="pt-1"><%= recipe.name%></div>
                 </a>
@@ -99,21 +98,21 @@
     </div>
 </section>
 
-<!--THAI End-->
+<!--Desayunos End-->
 
-<!--American-->
+<!--Almuerzos-->
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
-        <h2>American Category</h2>
-        <a href="/categories/American" class="ms-auto">View More</a>
+        <h2>Almuerzos</h2>
+        <a href="/categories/Almuerzos" class="ms-auto">Ver más</a>
     </div>
 
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-        <% if(typeof food.American !== undefined && food.American.length > 0) { %>
-            <% food.American.forEach(function(recipe, index) { %>
+        <% if(typeof food.Almuerzos !== undefined && food.Almuerzos.length > 0) { %>
+            <% food.Almuerzos.forEach(function(recipe, index) { %>
                     <a href="/recipe/<%= recipe._id%>" class="col text-center category_link">
                     <div class="category__img category__img--large shadow">
-                        <img src="uploads/<%= recipe.img%>" alt="<%= recipe.name%>" loading="lazy">
+                        <img src="<%= recipe.img%>" alt="<%= recipe.name%>" loading="lazy">
                     </div>
                     <div class="pt-1"><%= recipe.name%></div>
                 </a>
@@ -121,22 +120,21 @@
         <% } %>
     </div>
 </section>
+<!--Almuerzos End-->
 
-<!--American End-->
-
-<!--Japanese-->
+<!--Cenas-->
 <section class="pb-4 pt-4">
     <div class="d-flex mb-2 align-items-center">
-        <h2>Japanese Category</h2>
-        <a href="/categories/Japanese" class="ms-auto">View More</a>
+        <h2>Cenas</h2>
+        <a href="/categories/Cenas" class="ms-auto">Ver más</a>
     </div>
 
     <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
-        <% if(typeof food.Japanese !== undefined && food.Japanese.length > 0) { %>
-            <% food.Japanese.forEach(function(recipe, index) { %>
+        <% if(typeof food.Cenas !== undefined && food.Cenas.length > 0) { %>
+            <% food.Cenas.forEach(function(recipe, index) { %>
                     <a href="/recipe/<%= recipe._id%>" class="col text-center category_link">
                     <div class="category__img category__img--large shadow">
-                        <img src="uploads/<%= recipe.img%>" alt="<%= recipe.name%>" loading="lazy">
+                        <img src="<%= recipe.img%>" alt="<%= recipe.name%>" loading="lazy">
                     </div>
                     <div class="pt-1"><%= recipe.name%></div>
                 </a>
@@ -144,20 +142,20 @@
         <% } %>
     </div>
 </section>
-<!--Japanese End-->
+<!--Cenas End-->
 
 <!--Submit-->
 
 <section class="px-4 py-5 my-5 text-center">
-    <img src="/img/#" class="d-block mx-auto mb-4 img-fluid" alt="PUBLISH YOUR RECIPE FOR FREE" width="566px" height="208px" loading="lazy">
-    <h1 class="display-5 fw-bold">PUBLISH YOUR RECIPE FOR FREE</h1>
+    <!--<img src="/img/#" class="d-block mx-auto mb-4 img-fluid" alt="PUBLISH YOUR RECIPE FOR FREE" width="566px" height="208px" loading="lazy">-->
+    <h1 class="display-5 fw-bold">Publica tu receta de forma gratuita!</h1>
 
     <div class="col-lg-6 mx-auto">
         <p class="lead mb-4">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Maiores cum fuga voluptate!
+            Comparte tus deliciosas recetas con la comunidad culinaria. Publica tu creación de forma gratuita y permite que otros disfruten de tus sabores únicos. ¡Haz que tu talento culinario brille y sé parte de nuestra comunidad gastronómica!
         </p>
         <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
-            <a href="/submitRecipe" class="btn btn-primary btn-dark btn-lg">Submit Recipe</a>
+            <a href="/submitRecipe" class="btn btn-primary btn-dark btn-lg">Publica ahora</a>
         </div>
     </div>
 </section>

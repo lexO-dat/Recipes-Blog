@@ -1,5 +1,6 @@
 const express = require('express');
 const router = express.Router();
+const upload = require('../utils/fileUpload');
 
 //link the route to the controller
 const recipeController = require('../controllers/recipeController');
@@ -15,9 +16,8 @@ router.post('/search', recipeController.searchRecipes);
 router.get('/ExploreLatest', recipeController.exploreLatest);
 router.get('/exploreRandom', recipeController.exploreRandom);
 router.get('/submitRecipe', recipeController.submitRecipe);
-router.post('/submitRecipe', recipeController.submitRecipePost);
-
-
+router.post('/submitRecipePost', upload("./public/uploads"), recipeController.submitRecipePost);
+router.get('/enmantencion', recipeController.enmantencion);
 
 module.exports = router;
 

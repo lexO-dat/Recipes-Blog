@@ -1,6 +1,8 @@
 require('../models/database');
 const category = require('../models/category');
 const recipe = require('../models/recipe');
+const multer = require('multer');
+const upload = multer({ dest: './public/uploads/' });
 
 /*
  * GET /
@@ -11,14 +13,19 @@ exports.home = async (req, res) => {
         const limit = 5;
         const categories = await category.find({}).limit(limit);
         const recipes = await recipe.find({}).sort({_id: -1}).limit(limit);
-        const Thai = await recipe.find({category: 'Thai'}).sort({_id: -1}).limit(limit);
-        const American = await recipe.find({category: 'American'}).sort({_id: -1}).limit(limit);
-        const Chinese = await recipe.find({category: 'Chinese'}).sort({_id: -1}).limit(limit);
-        const Mexican = await recipe.find({category: 'Mexican'}).sort({_id: -1}).limit(limit);
-        const Chilean = await recipe.find({category: 'Chilean'}).sort({_id: -1}).limit(limit);
-        const Japanese = await recipe.find({category: 'Japanese'}).sort({_id: -1}).limit(limit);
+        const PlatosVegetarianos = await recipe.find({category: 'Platos Vegetarianos'}).sort({_id: -1}).limit(limit);
+        const AperitivosyTapas = await recipe.find({category: 'Aperitivos y Tapas'}).sort({_id: -1}).limit(limit);
+        const Almuerzos = await recipe.find({category: 'Almuerzos'}).sort({_id: -1}).limit(limit);
+        const Desayunos = await recipe.find({category: 'Desayunos'}).sort({_id: -1}).limit(limit);
+        const Repostería = await recipe.find({category: 'Repostería'}).sort({_id: -1}).limit(limit);
+        const PlatosVeganos = await recipe.find({category: 'Platos Veganos'}).sort({_id: -1}).limit(limit);
+        const Cenas = await recipe.find({category: 'Cenas'}).sort({_id: -1}).limit(limit);
+        const Postres = await recipe.find({category: 'Postres'}).sort({_id: -1}).limit(limit);
+        const ComidaFria = await recipe.find({category: 'Comida Fría'}).sort({_id: -1}).limit(limit);
+        const ComidaCaliente = await recipe.find({category: 'Comida Caliente'}).sort({_id: -1}).limit(limit);
+        const ComidaRapida = await recipe.find({category: 'Comida Rápida'}).sort({_id: -1}).limit(limit);
 
-        const food = { recipes, Thai, American, Chinese, Mexican, Chilean, Japanese };
+        const food = { recipes, PlatosVegetarianos, AperitivosyTapas, Almuerzos, Desayunos, Repostería, PlatosVeganos, Cenas, Postres, ComidaFria, ComidaCaliente, ComidaRapida };
 
         res.render('index',
         {
@@ -174,18 +181,13 @@ exports.exploreRandom = async (req, res) => {
  * 
 */
 exports.submitRecipe = async (req, res) => {
-
+    
+    //alert('Debe rellenar todos los campos para enviar la receta.');
     try {
-        const infoErrorsObj = req.flash('infoErrors');
-        const infoSubmitObj = req.flash('infoSubmit');
-
-
         res.render('submitRecipe',
         {
             //pass in the title variable to the view
             title: 'CookingBlog - Submit',
-            infoErrorsObj,
-            infoSubmitObj
         });
     } catch (error) {
         res.status(500).send({message: error.message || 'Error occurred'});
@@ -197,40 +199,49 @@ exports.submitRecipe = async (req, res) => {
  * 
 */
 exports.submitRecipePost = async (req, res) => {
-
     try {
-        let imageUploadFile;
-        let uploadPath;
-        let newImageName;
-
-        if(!req.files || Object.keys(req.files).length === 0) {
-            req.flash('infoErrors', 'No files were uploaded.');
-            return res.redirect('/submitRecipe');
-        }else{
-            imageUploadFile = req.files.imgage;
-            newImageName = Date.now() + imageUploadFile.name;
-            uploadPath = require('path').resolve('./') + '/public/uploads/' + newImageName;
-            imageUploadFile.mv(uploadPath, function(err) {
-                if (err){
-                    req.flash('infoErrors', err.message);
-                    return res.redirect('/submitRecipe');
-                }
-            });
+        let payload = req.body;
+        var imgUrl = '';
+        if (req.file){
+            imgUrl = `/uploads/${req.file.filename}`; // Assuming you have a file field called `image`
         }
+        
+        payload.img = imgUrl;
+
+        console.log(payload);
+
         const newRecipe = new recipe({
             name: req.body.name,
             description: req.body.description,
             email: req.body.email,
-            ingredients: req.body.ingredients,
+            ingredients: req.body.ingredients, // Assuming ingredients is a comma-separated string
             category: req.body.category,
-            img: req.body.newImageName
+            img: payload.img, // Assign the string, not the entire payload object
         });
 
         await newRecipe.save();
-        req.flash('infoSubmit', 'Thank you for submitting your recipe!');
-        res.redirect('/submitRecipe');
+        //alert('Receta enviada con éxito, redirigiendo a inicio.');
+        res.redirect('/');
     } catch (error) {
-        req.flash('infoErrors', error.message);
+        console.error(error);
+        // Manejar el error según tus necesidades (puede enviar una respuesta de error al cliente, por ejemplo).
         res.redirect('/submitRecipe');
+    }
+};
+
+/*
+ * GET / enmantencion
+ * 
+*/
+
+exports.enmantencion = async (req, res) => {
+    try {
+        res.render('enmantencion',
+        {
+            //pass in the title variable to the view
+            title: 'CookingBlog - En Mantención'
+        });
+    } catch (error) {
+        res.status(500).send({message: error.message || 'Error occurred'});
     }
 };

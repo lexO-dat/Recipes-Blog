@@ -1,27 +1,15 @@
 <div class="px-4 py-5 my-5 text-center">
-    <h1 class="display-5 fw-bold">Submit Your Recipe</h1>
+    <h1 class="display-5 fw-bold">Sube tu receta ahora!</h1>
     <div class="col-lg-6 mx-auto">
-      <p class="lead">Share your amazing recipies with thousands of web developers accross the world. Fill our form to get started.</p>
+      <p class="lead">Comparte tu Pasión Culinaria: Publica tus Recetas de Forma Sencilla y Rápida en CookingBlog </p>
     </div>
   </div>
   
   <div class="row justify-content-center">
-  
-    <% if(infoSubmitObj != '') { %>
-      <div class="col-8 alert alert-success" role="alert">
-        <%= infoSubmitObj %>
-      </div>
-    <% } %>
-  
-    <% if(infoErrorsObj != '') { %>
-      <div class="col-8 alert alert-danger" role="alert">
-        <%= infoErrorsObj[0].message %>
-      </div>
-    <% } %>
-  
+
     <div class="col-8">
   
-      <form action="/submitRecipe" enctype="multipart/form-data" method="POST">
+      <form action="/submitRecipePost" method="POST" enctype='multipart/form-data'>
       
         <div class="row g-3">
   
@@ -31,38 +19,45 @@
           </div>
   
           <div class="col-12">
-            <label for="name" class="form-label">Recipe Name</label>
+            <label for="name" class="form-label">Nombre receta</label>
             <input type="text" name="name" id="name" class="form-control" required>
           </div>
           
           <div class="col-12">
-            <label for="description" class="form-label">Description</label>
+            <label for="description" class="form-label">Descripccion</label>
             <textarea name="description" id="description" class="form-control" cols="30" rows="4"></textarea>
           </div>
   
           <div class="col-12">
-            <label for="name" class="form-label">Ingredients</label><br>
-            <small>Example: Ice</small>
+            <label for="name" class="form-label">Ingredientes</label><br>
+            <small>Ejemplo: Tomate</small>
             <div class="ingredientList">
               <div class="ingredeintDiv mb-1">
-                <input type="text" name="ingredients" class="form-control">
+                <input type="text" name="ingredients[]" class="form-control">
               </div>
             </div>
           </div>
   
           <div class="col-12">
-            <button type="button" class="btn btn-outline-primary" id="addIngredientsBtn">+ Ingredient</button>
+            <button type="button" class="btn btn-outline-primary" id="addIngredientsBtn">+</button>
+            <button type="button" class="btn btn-outline-primary" id="removeIngredientsBtn">-</button>
           </div>
   
           <div class="col-12">
-            <label for="category">Select Category</label>
+            <label for="category">Selecciona las categorias</label>
             <select class="form-select form-control" name="category" aria-label="Category">
-              <option selected>Select Category</option>
-              <option value="Thai">Thai</option>
-              <option value="American">American</option>
-              <option value="Chinese">Chinese</option>
-              <option value="Mexican">Mexican</option>
-              <option value="Indian">Indian</option>
+              <option selected>Selecciona...</option>
+              <option value="Aperitivos y Tapas">Aperitivos y Tapas</option>
+              <option value="Platos Vegetarianos">Platos Vegetarianos</option>
+              <option value="Desayunos">Desayunos</option>
+              <option value="Almuerzos">Almuerzos</option>
+              <option value="Repostería">Repostería</option>
+              <option value="Platos Veganos">Platos Veganos</option>
+              <option value="Cenas">Cenas</option>
+              <option value="Postres">Postres</option>
+              <option value="Comida Fría">Comida Fría</option>
+              <option value="Comida Caliente">Comida Caliente</option>
+              <option value="Comida Rápida">Comida Rápida</option>
             </select>
           </div>
   
@@ -72,7 +67,7 @@
           </div>
   
           <div class="col-12">
-            <button type="submit" class="btn btn-primary">Submit Recipe</button>
+            <button type="submit" class="btn btn-primary">Publicar</button>
           </div>
   
         </div>
@@ -81,3 +76,10 @@
   
     </div>
   </div>
+
+  <script>
+    window.onload = function() {
+      // Mostrar la alerta
+      Swal.fire("Debe rellenar todos los campos para enviar la receta.");
+    };
+  </script>

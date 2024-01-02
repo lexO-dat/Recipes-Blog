@@ -19,7 +19,7 @@ const recipeschema = new mongoose.Schema({
     },
     category: {
         type: String,
-        enum: ['Thai', 'Chinese', 'Japanese', 'Korean', 'Vietnamese', 'Indian', 'Italian', 'Mexican', 'American', 'French', 'Greek', 'Spanish', 'Middle Eastern', 'Mediterranean', 'Other'],
+        enum: ['Platos Vegetarianos', 'Aperitivos y Tapas', 'Almuerzos', 'Desayunos', 'Repostería', 'Platos Veganos', 'Cenas', 'Postres', 'Comida Fría', 'Comida Caliente', 'Comida Rápida'],
         required: 'This field is required'
     },
     img: {
