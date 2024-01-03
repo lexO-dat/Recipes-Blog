@@ -1,5 +1,5 @@
 {
   "builds": [{ "src": "./app.js", "use": "@vercel/node" }],
   "routes": [{ "src": "/(.*)", "dest": "/"  }],
-  "rewrites": [{ "src": "/(.*)", "destination": "/" }]
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }]
 }
