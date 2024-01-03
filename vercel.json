@@ -2,17 +2,17 @@
   "version": 2,
   "builds": [
     {
-      "src": "./app.js",  // Ajusta la ruta al archivo principal de tu servidor
-      "use": "@now/node"  // Especifica el entorno para ejecutar tu servidor Node.js
+      "src": "./app.js", 
+      "use": "@now/node"  
     }
   ],
   "routes": [
-    { "src": "/api/(.*)", "dest": "/app.js" },  // Redirige las solicitudes de API
-    { "src": "/uploads/(.*)", "dest": "/public/uploads/$1" },  // Redirige las solicitudes de archivos subidos
-    { "src": "/(.*)", "dest": "/app.js" }  // Redirige todas las demás solicitudes al servidor Node.js
+    { "src": "/api/(.*)", "dest": "/app.js" },
+    { "src": "/uploads/(.*)", "dest": "/public/uploads/$1" }, 
+    { "src": "/(.*)", "dest": "/app.js" }
   ],
   "env": {
-    "MONGO_URI": "<Tu URI de MongoDB aquí>"  // Agrega tus variables de entorno aquí
+    "MONGO_URI": "<Tu URI de MongoDB aquí>" 
   }
 }
 
